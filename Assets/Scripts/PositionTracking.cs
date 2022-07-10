@@ -11,6 +11,11 @@ public class PositionTracking : MonoBehaviour
 
     private void LateUpdate()
     {
+        Track();
+    }
+
+    protected void Track()
+    {
         float x = modifyX ? target.position.x: transform.position.x;
         float y = modifyY ? target.position.y: transform.position.y;
         float z = modifyZ ? target.position.z: transform.position.z;

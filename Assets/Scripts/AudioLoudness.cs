@@ -25,7 +25,6 @@ public class AudioLoudness : MonoBehaviour
     {
         currentUpdateTime += 0f;
         source.clip.GetData(clipSampleData, source.timeSamples);
-        GetSpectrumData();
         clipLoudness = 0f;
         foreach (var sample in clipSampleData)
         {

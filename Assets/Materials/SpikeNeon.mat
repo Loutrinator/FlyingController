@@ -34,8 +34,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AnimationSpeed: 0.05
-    - _BaseScale: 1
+    - _AnimationSpeed: 0
+    - _BaseScale: 0.76
     - _EnableMusic: 0
     - _MusicIntensity: 0.3
     - _MusicSpeed: 120

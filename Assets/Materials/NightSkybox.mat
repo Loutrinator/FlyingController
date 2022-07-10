@@ -51,15 +51,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _FadeBottom: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SkyTransition: 3
+    - _SkyTransition: 3.74
     - _StarFade: 0.28
     - _StarFadeStart: 0.5
     - _StarsBlackBalance: 0.2
     m_Colors:
-    - _GroundColor: {r: 0, g: 0, b: 0, a: 0}
+    - _GroundColor: {r: 0.13401246, g: 0.027367385, b: 0.14150941, a: 1}
     - _HorizonColor: {r: 0.5377358, g: 0.1039961, b: 0.2351526, a: 0}
     - _SkyColor: {r: 0.0249644, g: 0.028904837, b: 0.103773594, a: 0}
-    - _StarColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0}
+    - _StarColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0}
   m_BuildTextureStacks: []

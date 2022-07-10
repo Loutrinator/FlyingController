@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4624164263635008726}
   - component: {fileID: 8611884626262766451}
   - component: {fileID: 5793731633741481913}
-  - component: {fileID: 5793731633741481919}
   - component: {fileID: 5793731633741481912}
   m_Layer: 0
   m_Name: spikeRing
@@ -86,22 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5793731633741481919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5433456925716342380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a38c21d924041dd46b0043255b1d47a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 0}
-  updateStep: 0.05
-  sampleDataLength: 1024
-  clipLoudness: 0
 --- !u!114 &5793731633741481912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,9 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  band: 0
+  lerpSpeed: 10
   intensity: 5
-  minTransformation: 1
-  maxTransformation: 2
+  minValue: 1
+  maxValue: 1
   modifyX: 0
   modifyY: 1
   modifyZ: 0
