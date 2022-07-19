@@ -41,4 +41,14 @@ public class Laser : MonoBehaviour
         disabled = true;
         laserRenderer.enabled = false;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Laser Hit");
+        Destroyable destroyable = other.gameObject.GetComponent<Destroyable>();
+        if (destroyable != null)
+        {
+            destroyable.Hit(1);
+        }
+    }
 }
