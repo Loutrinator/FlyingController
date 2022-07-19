@@ -7,7 +7,9 @@ using UnityEngine.PlayerLoop;
 public class Destroyable : MonoBehaviour
 {
     [SerializeField] private float maxHp;
+    [SerializeField] private GameObject onDestroyEffect;
     private float currentHp;
+    
 
     private void Start()
     {
@@ -31,6 +33,7 @@ public class Destroyable : MonoBehaviour
 
     private void Disable()
     {
+        Instantiate(onDestroyEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

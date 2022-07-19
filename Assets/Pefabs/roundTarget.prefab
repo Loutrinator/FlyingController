@@ -128,3 +128,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 1
+  onDestroyEffect: {fileID: 4193848610816913792, guid: e06b5e34c190c09438f56924365d83d6, type: 3}

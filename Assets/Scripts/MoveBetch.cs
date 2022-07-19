@@ -19,13 +19,11 @@ public class MoveBetch : MonoBehaviour
     private Vector3 _movement; 
     public bool boostOn;
     private float _boostForce;
-    private Vector3 _velocity;
     private float elapsedBetweenFire;
 
     private void Awake()
     {
         _movement = Vector2.zero;
-        _velocity = Vector3.zero;
     }
 
     private void Update()
