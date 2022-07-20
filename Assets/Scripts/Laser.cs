@@ -5,32 +5,17 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class Laser : MonoBehaviour
+public class Laser : IPooledObject
 {
     [SerializeField] private float speed = 50f;
     [SerializeField] private float timeAlive = 5f;
 
-    private MeshRenderer laserRenderer;
     private float startTime;
-    
-    private bool disabled = false;
-
-    private void Start()
-    {
-        laserRenderer = GetComponent<MeshRenderer>();
-        Reset();
-    }
-
-    public void Reset()
-    {
-        startTime = Time.time;
-    }
 
     private void FixedUpdate()
     {
-        if (disabled) return;
         transform.position += transform.forward * (speed * Time.fixedDeltaTime);
-        if (Time.time - startTime > timeAlive)
+        if (Time.time - startTime > timeAlive || transform.position.y < -2f)
         {
             Disable();
         }
@@ -38,8 +23,7 @@ public class Laser : MonoBehaviour
 
     private void Disable()
     {
-        disabled = true;
-        laserRenderer.enabled = false;
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,5 +34,10 @@ public class Laser : MonoBehaviour
         {
             destroyable.Hit(1);
         }
+    }
+
+    public override void OnObjectSpawn()
+    {
+        startTime = Time.time;
     }
 }

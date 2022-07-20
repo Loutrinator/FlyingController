@@ -4,23 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class Destroyable : MonoBehaviour
+public class Destroyable : IPooledObject
 {
     [SerializeField] private float maxHp;
     [SerializeField] private GameObject onDestroyEffect;
     private float currentHp;
     
-
-    private void Start()
-    {
-        Reset();
-    }
-
-    public void Reset()
-    {
-        currentHp = maxHp;
-    }
-
     public void Hit(int damages)
     {
         Debug.Log("Hit !");
@@ -34,6 +23,11 @@ public class Destroyable : MonoBehaviour
     private void Disable()
     {
         Instantiate(onDestroyEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public override void OnObjectSpawn()
+    {
+        currentHp = maxHp;
     }
 }

@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
 {
 
     [SerializeField]
-    private MoveBetch target;
+    private ShipController target;
     [SerializeField]
     private Camera cam;
     [SerializeField]

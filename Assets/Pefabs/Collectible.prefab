@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 229044352024709650}
   - component: {fileID: 1061098961950536226}
   m_Layer: 0
-  m_Name: roundTarget
+  m_Name: Collectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

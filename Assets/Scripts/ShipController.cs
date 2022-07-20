@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 
-public class MoveBetch : MonoBehaviour
+public class ShipController : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float boost;
@@ -16,14 +16,21 @@ public class MoveBetch : MonoBehaviour
     [SerializeField] private Laser laserPrefab;
     [SerializeField] private float shootingFrequency = 0.3f;
     [SerializeField] private List<Transform> canonPosition;
+    [SerializeField] private Cursor cursor;
     private Vector3 _movement; 
     public bool boostOn;
     private float _boostForce;
     private float elapsedBetweenFire;
+    private ObjectPooler _objectPooler;
 
     private void Awake()
     {
         _movement = Vector2.zero;
+    }
+
+    private void Start()
+    {
+        _objectPooler = ObjectPooler.Instance;
     }
 
     private void Update()
@@ -41,14 +48,16 @@ public class MoveBetch : MonoBehaviour
         
         _boostForce = Mathf.Lerp(_boostForce, boostOn ? boost : 0, boostLerpSpeed);
         transform.position += transform.forward * ((_boostForce+speed)*Time.fixedDeltaTime);
-        Vector3 eulers = transform.eulerAngles;
-        float yawAngle = Mathf.Lerp(eulers.z, _movement.x * rollIntensity, rollSpeed);
-        float pitchAngle = Mathf.Lerp(eulers.z, _movement.y * pitchIntensity, pitchSpeed);
+        Vector3 eulers = transform.localEulerAngles;
+        float yawAngle = Mathf.Lerp(eulers.x, _movement.x * rollIntensity, rollSpeed);
+        float pitchAngle = Mathf.Lerp(eulers.y, _movement.y * pitchIntensity, pitchSpeed);
         float rollAngle = Mathf.Lerp(eulers.z, -_movement.z * pitchIntensity, pitchSpeed);
         
+        Vector3 up = transform.up;
+        Vector3 right = transform.right;
         transform.RotateAround(transform.forward, rollAngle * Time.fixedDeltaTime);
-        transform.RotateAround(transform.up, yawAngle * Time.fixedDeltaTime);
-        transform.RotateAround(transform.right, pitchAngle * Time.fixedDeltaTime);
+        transform.RotateAround(up, yawAngle * Time.fixedDeltaTime);
+        transform.RotateAround(right, pitchAngle * Time.fixedDeltaTime);
     }
 
     private void Shoot()
@@ -59,7 +68,16 @@ public class MoveBetch : MonoBehaviour
             elapsedBetweenFire -= shootingFrequency;
             foreach (var canon in canonPosition)
             {
-                Instantiate(laserPrefab, canon.position + canon.forward*1f, canon.rotation);
+                Vector3 pos = canon.position + canon.forward * 1f;
+                Vector3 forward = cursor.GetTarget() - pos;
+                Vector3 up = canon.up;
+                Vector3 right = Vector3.Cross(up,forward);
+                up = Vector3.Cross(forward,right);
+                var laser = _objectPooler.SpawnFromPool("laser", canon.position + canon.forward*1f, Quaternion.identity);
+                laser.transform.up = up;
+                laser.transform.right = right;
+                laser.transform.forward = forward;
+
             }
         }
     }
